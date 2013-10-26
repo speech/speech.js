@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Speechjs : Reference JavaScript DNS implimentation" />
+    <meta name="description" content="Speechjs : The reference JavaScript DNS implementation" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -19,7 +19,7 @@
           <a id="forkme_banner" href="https://github.com/SpeechJS/speechjs">View on GitHub</a>
 
           <h1 id="project_title">Speechjs</h1>
-          <h2 id="project_tagline">Reference JavaScript DNS implimentation</h2>
+          <h2 id="project_tagline">The reference JavaScript DNS implementation</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/SpeechJS/speechjs/zipball/master">Download this project as a .zip file</a>
@@ -31,27 +31,63 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h2>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h2>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Speech.js is a thin a thin wrapper which translates URI's between the traditional domain name system and an Alternative Domain Name System (altDNS), transforming <code>example.alt</code>-&gt; <code>example.jsdns.tld</code>.  Speech.js is the reference implementation of the JavaScript Domain Name System client specification.  jsDNS clients are engineered to provide low-risk (as opposed to mirrors) and scalable (unlike server side proxies) access to altDNS systems that are nearly transparent to the end user and interoperable with the rest of the web.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<h2>
+<a name="political" class="anchor" href="#political"><span class="octicon octicon-link"></span></a>Political</h2>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Speech.is (pronounced "speech DOT is") provides access to the .bit decentralyzed alternative domain name system. and serves as the reference deployment of Speech.js.  Speech.js, Speech.is, and the .bit DNS system are all parts of a larger effort to end the threat of SOPA and other state-sponsored <a href="https://www.eff.org/free-speech-weak-link#dns">DNS censorship</a> regimes.</p>
+
+<p>Speech.is comes with additional legal, technological, and political defenses above and beyond what a vanilla Speech.js implimention can provide.  For more information, see COMING SOON.</p>
+
+<h2>
+<a name="user-experience" class="anchor" href="#user-experience"><span class="octicon octicon-link"></span></a>User Experience</h2>
+
+<p>jsDNS clients extend the existing user experience of browsing websites websites on alternative domain name systems  However, unlike server-side proxies and mirrors, jsDNS clients rely on the user for sources of routing information and perform all routing on the client-side. </p>
+
+<p>Speech.js goes one step further by relying on the friend network for routing information, storing it ** in the browser** and automatically updating it whenever changes occur. From then on, even if the user restarts their computer, they are never prompted to login again.</p>
+
+<p>The user experience for visiting a Speech.js website is identical to that of any other website with a login requirement, such as the New York Times or Facebook. </p>
+
+<h2>
+<a name="legal" class="anchor" href="#legal"><span class="octicon octicon-link"></span></a>Legal</h2>
+
+<p>As Speech.js neither hosts nor links to any  content deemed objectionable in major western democracies, the Speech.js webhost, their upstream carriers, and the owners of the domain name are all immune from legal and political censorship.</p>
+
+<h2>
+<a name="scaling" class="anchor" href="#scaling"><span class="octicon octicon-link"></span></a>Scaling</h2>
+
+<p>As a Speech.js deployment needs to host only 2 static files (the parent frame and the child frame) and can (soon) rely upon the <a href="http://cdnjs.com/">cdnjs</a> CDN for hosting all CSS and Javascript. Furthermore, with Cloudflare's free HTML caching, any Speech.js deployment can scale to virtually any traffic load. Even if a deployment got as popular as the Yahoo.com homepage, the hosting costs would amount to around <a href="https://docs.google.com/spreadsheet/ccc?key=0Am9LbxJR3-Q-dFQ3c2lJa1BVejdrT2JnZjBRWm83YlE&amp;usp=sharing">$30/month</a>.</p>
+
+<h2>
+<a name="examplejsdnstld" class="anchor" href="#examplejsdnstld"><span class="octicon octicon-link"></span></a>example.jsdns.tld</h2>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="navigationstart" class="anchor" href="#navigationstart"><span class="octicon octicon-link"></span></a>navigationStart</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Whatever the URL, be it wikipedia.jsdns.tld or wikileaks.jsdns.tld, a Speech.js deployment serves the exact same webpage to visitors. What appears to be the Speech.is homepage is actually an iFrame containing a page from secure.jsdns.tld which contains the Speech.js script. The parent page (the jsdns.tld homepage) is hidden and the child page (from secure.jsdns.tld) is shown as if it were the main page using the new <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-iframe-element.html#attr-iframe-seamless"><code>seamless</code></a> attribute. </p>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="redirectstart" class="anchor" href="#redirectstart"><span class="octicon octicon-link"></span></a>redirectStart</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>The user logs into their social network of choice and chooses the jsDNS feeds they wish to subscribe to.  These feeds can be as simple as private friend to friend message with raw JSON, an app that the user or their friends have authorized, or jsDNS entries published as posts. Speech.js presents the lists to the user in order of popularity but ultimately lets the user decide which DNS publisher(s) s/he trusts.  Feeds can be customized for each subscriber, enabling publishers to hand out <strong>unique (and presumably uncensored) endpoints for every user</strong>.</p>
+
+<h3>
+<a name="domainlookupstart" class="anchor" href="#domainlookupstart"><span class="octicon octicon-link"></span></a>domainLookupStart</h3>
+
+<p>Because the parent page at Speech.is  and  the child iFrame page have different URLs, the iFrame dictates can block the parent from accessing to its content. Instead, the parent window uses post messaging to relay the URI to <tt>Speech.js</tt> which subsequently looks up the name from <tt><a href="http://en.wikipedia.org/wiki/Web_storage">localStorage</a></tt> and passes the URI back to parent frame. After this interaction, the inner iFrame blocks any additional requests for information, ensuring that destination websites cannot access the records. </p>
+
+<h3>
+<a name="requeststart" class="anchor" href="#requeststart"><span class="octicon octicon-link"></span></a>requestStart</h3>
+
+<p>The parent iFrame takes this information and  loads the destination website using the iFrame containing the <code>secure.jsdns.tld</code> page.  There is a second iFrame that contains a webworker which updates the database in the background. It neither recieves nor sends messages from the parent frame.</p>
+
+<p>If the destination webpage allows the parent page to access to its content<sup><a href="#cors">note</a></sup> URLs pointing to a website on the alternative DNS domain are rewritten to jsdns.alt submains, transforming linkedsite.alt to linkedsite.jsdns.alt.  However,the <a href="http://dot-bit.org/JsDNS_RFC">jsDNS specification</a> outlines <a href="http://dot-bit.org/JsDNS_RFC#User_Interaction_Models">multiple access scenarios</a> and a website can enable any jsDNS deployment to rewrite it's page links, restrict access only to specific jsDNS deployments, perform it's own URL rewriting, or pop out of iFrame as security needs dictate.</p>
+
+<p>The jsDNS deployment parent page (but not the secure.jsdns.tld page) is expected to have wildcard CORS access, enabling the destination website to verify the javascript, CSS, and HTML of the webpage.  We believe that we can maintain a level of security as high as your visitors local DNS server or your favorite package manager's local mirror.  In the future, we may be able to offer even stronger security guarantees.</p>
 
 <h3>
 <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
