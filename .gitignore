@@ -6,3 +6,5 @@ app/components
 closure-library
 app/jsc
 npm-debug.log
+.idea
+.iml

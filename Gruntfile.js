@@ -23,30 +23,30 @@ module.exports = function (grunt) {
     externsPath: 'build/externs/',
 
     // define the main namespace of your app.
-    entryPoint: 'app',
+    entryPoint: 'jsdns',
 
     // The path to the closure library
-    closureLibrary: process.env.CLOSURE_PATH || 'app/closure-library',
+    closureLibrary: process.env.CLOSURE_PATH || 'sites/closure-library',
 
     // The path to the closure linter.
-    closureLinter: 'app/closure-linter/closure_linter',
+    closureLinter: 'sites/closure-linter/closure_linter',
 
     // The path to the installed bower components
-    componentPath: 'app/components',
+    componentPath: 'sites/components',
 
     // the compiled file
-    destCompiled: 'app/jsc/app.js',
+    destCompiled: 'sites/jsc/app.js',
 
     // define the path to the app
-    appPath: 'app/js/',
+    appPath: 'sites/js/',
 
     // The location of the source map
-    sourceMap: 'app/jsc/sourcemap.js.map',
+    sourceMap: 'sites/jsc/sourcemap.js.map',
 
     // This sting will wrap your code marked as %output%
     // Take care to edit the sourcemap path
     outputWrapper: '(function(){%output%}).call(this);' +
-      '//@sourceMappingURL=app/jsc/sourcemap.js.map'
+      '//@sourceMappingURL=sites/jsc/sourcemap.js.map'
   };
 
   // the file globbing pattern for vendor file uglification.
@@ -258,18 +258,18 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: 'app/images',
+          cwd: 'sites/images',
           src: '{,*/}*.{png,jpg,jpeg}',
-          dest: 'app/images'
+          dest: 'sites/images'
         }]
       }
     },
     cssmin: {
       dist: {
         files: {
-          'app/styles/main.css': [
+          'sites/styles/main.css': [
             'temp/styles/{,*/}*.css',
-            'app/styles/{,*/}*.css'
+            'sites/styles/{,*/}*.css'
           ]
         }
       }
@@ -281,7 +281,7 @@ module.exports = function (grunt) {
       app:{
         closureLinterPath : CONF.closureLinter,
         src: [
-          'app/js/**'
+          'sites/js/**'
         ],
         options: {
           stdout: true,
@@ -293,7 +293,7 @@ module.exports = function (grunt) {
       app:{
         closureLinterPath : CONF.closureLinter,
         src: [
-          'app/js/**'
+          'sites/js/**'
         ],
         options: {
           stdout: true,
