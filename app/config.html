@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <!--TODO: redo using jquery and handlebar
+      TODO: use layout templates -->
+  <meta charset="UTF-8">
+  <title>Secure SpeechJS</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
+  <script src="https://rawgithub.com/angular-ui/ui-ace/master/ui-ace.js"></script>
+  <script src="/scripts/accordion.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js"></script>
+  <!--Angular UI-Bootstrap not compatible with 3.0 yet, load 2.3.1 and then load subset of 3.0-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.css" rel="stylesheet">
+  <!--<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="/styles/bootstrap.css">
+
+  <script>
+    var app = angular.module('config', [
+      'ui.bootstrap',
+      'ui.ace'
+    ]);
+
+    function AccordionDemoCtrl($scope) {
+      //I know this is not angular, it's a hack, please fix it!
+      $scope.configUI = true;
+
+
+      $scope.entries = [];
+
+      $scope.addEntry = function(entry) {
+        localStorage.setItem(entry.name, entry.value);
+
+        $scope.entries.push(
+            {
+              'name' : entry.name,
+              'value': entry.value
+            }
+        )
+      }
+
+      $scope.removeEntry = function(entry) {
+        localStorage.removeItem(entry.name);
+        var index = $scope.entries.indexOf(entry);
+        $scope.entries.splice(index, 1);
+      }
+
+
+      for (var key in localStorage) {
+        if (key[0] !== "_" && key[0] !== "") {
+          $scope.addEntry({name: key, value: localStorage.getItem(key)});
+        }
+      }
+
+    }
+  </script>
+  <style>
+    body {
+      padding-top: 40px;
+    }
+
+    .css-form input.ng-invalid.ng-dirty {
+      background-color: #FA787E;
+    }
+
+    .css-form input.ng-valid.ng-dirty {
+      background-color: #78FA89;
+    }
+
+    .ace_editor {
+      height: 200px;
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="container" ng-app="config">
+
+  <div class="jumbotron">
+    <h1>SpeechJS</h1>
+
+    <p class="alert alert-error">This is a developer interface to add or delete records. It is all
+                                 pre-alpha code: nothing is secure, hide your hamster.</p>
+    <a href="#config">
+      <button type="button" class="btn btn-warning btn-large"
+              ng-model="configUI"
+              btn-checkbox
+              btn-checkbox-true="1"
+              btn-checkbox-false="0"
+          >
+        Toggle Config
+      </button>
+    </a>
+
+  </div>
+  <!--<div id="config" ng-app="config">-->
+  <div></div>
+  <div id="config" ng-show="configUI" class="panel panel-primary">
+    <div class="panel-heading">
+      <h1 class="panel-title">Config</h1>
+    </div>
+
+    <div ng-controller="AccordionDemoCtrl" class="panel-body">
+
+      <!--subscriptions-->
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h1 class="panel-title">Subscriptions</h1>
+        </div>
+        <div class="alert alert-warning">Subscriptions currently do not work AT ALL and this section is just a placeholder! There is one "publisher" whom is hardcoded into speech.js. However, the entries form below this section,  DOES work : )
+        </div>
+        <!--
+        TODO: figure out localStorage plumbing for subscribers
+          key: '_subscriber-name'
+          value: '{url: url, public-key:key}' or http://dot-bit.org/Personal_Namespace ?
+        TODO: figure out angularJS plumbing for subscribers
+        -->
+        <accordion close-others="false" class="panel-body">
+          <div style="padding: 1em">Filter: <input ng-model="searchPubs.name"></div>
+          <accordion-group heading="" ng-repeat="publisher in publishers | filter:searchPubs">
+            <pre class="pre-scrollable"></pre>
+            <form novalidate class="css-form" style="padding-bottom: 1em">
+              <button ng-click="removeEntry(publisher)" class="btn btn-danger btn-medium pull-right">Delete</button>
+            </form>
+          </accordion-group>
+        </accordion>
+        <div class="panel-footer" style="padding-bottom: 2em">
+          <span class="pull-right">
+          <label for="addPublisher">New Publisher URL:</label>
+          <input id="addPublisher"
+                 ng-model="publisher.url"
+                 type="url"
+                 required
+              >
+          <button ng-click="addPublisher(publisher)" class="btn btn-primary">Subscribe</button>
+          </span>
+          <br/>
+        </div>
+      </div>
+      <!--/subscriptions-->
+
+      <!--entries-->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title">Entries</h1>
+        </div>
+        <div class="alert alert-info"><p><strong>Adding</strong>/<strong>deleting</strong> entries actually works! However, there is no mechanism to <strong>edit</strong> an EXISTING entry. To edit an entry, you can:</p>
+          <ol>
+            <li>Use your browsers localStorage editing tools and reload the page.</li>
+            <li>Copy an existing entry, paste it into the "add entry" field, delete old the existing entry and edit/add
+                a new one.</li>
+            <li>Code up a per-entry <a href="http://getbootstrap.com/components/#nav-tabs">editing tab</a> to this UI
+                and <a href="https://github.com/SpeechJS/speechjs">submit a pull request.</a> : ) </li>
+          </ol>
+          <p>FYI: There are 5 debugging entries hardcoded into speech.js which show up here: bits, ipv4, ipv4-2, ipv6,
+             and ipv6-2. </p></div>
+        <!--
+        TODO: fix kludgy angularJS <-> localstorage hack
+        TODO: max-height and scrolling for entries
+        TODO: format JSON
+        TODO: per-entry editing tab
+        -->
+
+        <accordion close-others="false" class="panel-body">
+          <div style="padding: 1em">Filter: <input ng-model="searchText.name"></div>
+          <accordion-group heading="" ng-repeat="entry in entries | filter:searchText" style="margin: 0em 1em .5em 1em">
+            <pre class="pre-scrollable"></pre>
+            <form novalidate class="css-form" style="padding-bottom: 1em">
+              <button ng-click="removeEntry(entry)" class="btn btn-danger btn-medium pull-right">Delete</button>
+            </form>
+          </accordion-group>
+        </accordion>
+
+        <div class="panel-footer">
+
+          <form novalidate class="css-form">
+
+            <label>Name
+              <input type="text"
+                     ng-model="entry.name"
+                     required
+                     ng-minlength="1"
+                     ng-maxlength="63"
+                     ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9-]+$/"
+                  />
+            </label>
+            <!--
+            TODO: get ACE JS formatting working
+            TODO: validate JSON
+            TODO: Form/wizard full domain name spec: http://dot-bit.org/Namespace:Domain_names_v2.0
+            -->
+
+            <div
+                style="margin-bottom: 1em"
+                ng-model="entry.value"
+                ui-ace=
+                    "{
+                      useWrapMode : true,
+                      mode: 'javascript'
+                    }"
+                >
+            </div>
+            <i>Only performs <code>name</code> validation and a rough size check the <code>value</code>, see the <a
+                href="http://dot-bit.org/Namespace:Domain_names_v2.0">domain name specification</a> for more info</i>.
+            <button ng-click="addEntry(entry)" class="pull-right btn btn-primary">Add</button>
+            <br/>
+          </form>
+        </div>
+
+      </div>
+      <!--/entries-->
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+
+<div class="jumbotron">
+  <section>
+    <h1>Whoa!</h1>
+    <!--TODO: near-miss/search match service akin to OpenDNS-->
+    <p>Something went teribly wrong while trying to lookup <code id="custom-error">your site</code>!
+       Perhaps you misspelled something?
+       This IS a pre-alpha stage project, so not much is working....
+    </p>
+  </section>
+  <section id="error" style="display: none">
+    <h3>Here's the entry that caused the error:</h3>
+    <pre class="well" id="entry"></pre>
+  </section>
+  <script id="gist" src=""></script>
+  <a  id='github' href="https://github.com/SpeechJS/speechjs/issues/new">
+    <button type="button" class="btn btn-info btn-large pull-right">
+      Create New Issue on GitHub <span class="glyphicon glyphicon-share-alt"></span>
+    </button>
+  </a>
+</div>
+<script>
+  window.onload = function() {
+    //TODO:refactor using URI.js
+    //TODO:use listener instead of assigning onload
+    $.urlParam = function(name){
+      var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+      return results[1] || 0;
+    };
+
+    var name = decodeURIComponent($.urlParam('name'));
+    var jsDNS = decodeURIComponent($.urlParam('jsdns'));
+    var path = decodeURIComponent($.urlParam('path'));
+    var entry =  JSON.parse(decodeURIComponent($.urlParam('entry')));
+    $('entry').text(entry);
+
+    if (name) {
+      $('#custom-error').text('' + name + '.' + jsDNS);
+      $('#entry').text(JSON.stringify(entry,undefined,2));
+      $('#error').show();
+      $('#github').attr(
+          'href',
+          'https://github.com/SpeechJS/speechjs/issues/new?title='+
+              name +'+navigation+error&body=' +
+              encodeURIComponent(JSON.stringify(entry,undefined,2)) +
+              '&labels[]=bug'
+      );
+
+//        createGist(name, JSON.stringify((entry)));
+    }
+  };
+
+//  function createGist(name, entry){
+//    var gist = {
+//      "description": name,
+//      "public": true,
+//      "files": {
+//
+//      }
+//    };
+//    gist.files[name + ".urn"] = { "content": entry}
+//    $.post('https://api.github.com/gists',
+//        JSON.stringify(gist),
+//        function(data) {
+//          //https://gist.github.com/anonymous/7326378.js
+//          var gistUrl = "https://gist.github.com/anonymous/" + data.id + ".js";
+//          $('#gist').attr('src',gistUrl);
+//        }
+//    );
+//  }
+
+</script>

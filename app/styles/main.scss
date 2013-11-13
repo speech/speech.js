@@ -1,4 +1,4 @@
-$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
+$icon-font-path: "../bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
 
@@ -50,12 +50,8 @@ body {
 /* Main marketing message and sign up button */
 .jumbotron {
     text-align: center;
-    border-bottom: 1px solid #e5e5e5;
-}
 
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 /* Supporting marketing content */
