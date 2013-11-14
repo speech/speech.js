@@ -1,0 +1,54 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <!--styling is inlined on index.html performance reasons-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Speech.js</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <!-- build:js scripts/nav.js -->
+  <script src="scripts/nav.js"></script>
+
+  <!-- build:js scripts/vendor/modernizr.js -->
+  <script src="bower_components/modernizr/modernizr.js"></script>
+  <!-- endbuild -->
+  <style>
+  /*
+   * Styling is inlined for performance reasons
+   * TODO: test each of these settings, as they were thrown together in an adhoc fashion
+   */
+
+    html, body {
+      min-height: 100%;
+      overflow: hidden;
+      margin: 0px;
+    }
+
+    #speechjs {
+      border: 0px none transparent;
+      padding: 0px;
+      margin: 0px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+
+<!--<iframe id="speechjs" src="/connect.html" seamless width="100%"-->
+<iframe id="speechjs" seamless width="100%"
+        sandbox="allow-forms allow-scripts allow-top-navigation">
+</iframe>
+</div>
+
+<!-- build:js scripts/nav.js -->
+<script data-main="scripts/nav" src="bower_components/requirejs/require.js"></script>
+<!-- endbuild -->
+</body>
+</html>

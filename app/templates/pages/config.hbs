@@ -1,0 +1,225 @@
+<style>
+  .css-form input.ng-invalid.ng-dirty {
+    background-color: #FA787E;
+  }
+
+  .css-form input.ng-valid.ng-dirty {
+    background-color: #78FA89;
+  }
+
+  .ace_editor {
+    height: 200px;
+  }
+
+</style>
+<div class="jumbotron">
+  <h1>Speech.js Config</h1>
+
+  <p class="alert alert-danger">This is a developer interface to add or delete
+                                records. It is all alpha quality code: nothing
+                                is secure, hide your hamster.</p>
+
+  <p>This interface is also largely broken at the moment. However, you can
+     access the records using your browser's localStorage interface.  Firefox
+     <a href="http://goo.gl/KagiMI">requires an add-on</a>.
+  </p>
+  <a href="/images/chrome-localstorage.png"><img style="width: 100%"
+                                                 src="/images/chrome-localstorage.png"></a>
+
+    <button type="button" class="btn btn-warning btn-large"
+            btn-checkbox
+            btn-checkbox-true="1"
+            btn-checkbox-false="0"
+            onclick='$("#config").slideToggle()'
+        >
+
+      Toggle Config
+    </button>
+
+</div>
+
+<div id="config" class="panel panel-primary" style="display: none">
+  <div class="panel-heading">
+    <h1 class="panel-title">Config</h1>
+  </div>
+
+  <div class="panel-body">
+
+    <!--subscriptions-->
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <h1 class="panel-title">Subscriptions</h1>
+      </div>
+      <div class="alert alert-warning">Subscriptions currently do not work AT
+                                       ALL and this section is just a
+                                       placeholder!
+
+      </div>
+      <!--
+      TODO: figure out localStorage plumbing for subscribers
+        key: '_subscriber-name'
+        value: '{url: url, public-key:key}' or http://dot-bit.org/Personal_Namespace ?
+      TODO: figure out angularJS plumbing for subscribers
+      -->
+      <accordion close-others="false" class="panel-body">
+        <div style="padding: 1em">Filter: <input ng-model="searchPubs.name">
+        </div>
+        <accordion-group heading="{{publisher.name}}"
+                         ng-repeat="publisher in publishers | filter:searchPubs">
+          <pre class="pre-scrollable">{{publisher.value}}</pre>
+          <form novalidate class="css-form" style="padding-bottom: 1em">
+            <button onclick="removeEntry(publisher)"
+                    class="btn btn-danger btn-medium pull-right">Delete
+            </button>
+          </form>
+        </accordion-group>
+      </accordion>
+      <div class="panel-footer" style="padding-bottom: 2em">
+          <span class="pull-right">
+          <label for="addPublisher">New Publisher URL:</label>
+          <input id="addPublisher"
+                 type="url"
+                 required
+              >
+          <button onclick="" class="btn btn-primary">
+            Subscribe
+          </button>
+          </span>
+        <br/>
+      </div>
+    </div>
+    <!--/subscriptions-->
+
+    <!--entries-->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Entries</h1>
+      </div>
+      <div class="alert alert-info"><p>
+        <strong>Adding</strong>/<strong>deleting</strong> entries actually
+                               works! However, there is no mechanism to <strong>edit</strong>
+                               an EXISTING entry. To edit an entry, you can:</p>
+        <ol>
+          <li>Use your browsers localStorage editing tools and reload the
+              page.
+          </li>
+          <li>Copy an existing entry, paste it into the "add entry" field,
+              delete old the existing entry and edit/add
+              a new one.
+          </li>
+          <li>Code up a per-entry <a
+              href="http://getbootstrap.com/components/#nav-tabs">editing
+                                                                  tab</a> to
+              this UI
+              and <a href="https://github.com/SpeechJS/speechjs">submit a pull
+                                                                 request.</a> :
+              )
+          </li>
+        </ol>
+        <p>FYI: There are 5 debugging entries hardcoded into speech.js which
+           show up here: bits, ipv4, ipv4-2, ipv6,
+           and ipv6-2. </p></div>
+      <!--
+      TODO: fix kludgy angularJS <-> localstorage hack
+      TODO: max-height and scrolling for entries
+      TODO: format JSON
+      TODO: per-entry editing tab
+      -->
+
+      <script>
+        window.records = [
+          {name: 'hello', value: 'world'}
+        ];
+
+        //          var records = getRecords();
+        //
+        //          function getRecords(){
+        //            var r = [];
+        //            for (var key in localStorage) {
+        //              if (key[0] !== "_" && key[0] !== "") {
+        //                r.push({name: key, value: localStorage.getItem(key)});
+        //              }
+        //            }
+        //            return r;
+        //          }
+
+        addEntry = function(record) {
+          localStorage.setItem(record.name, record.value);
+          records[record.name] = { 'name': record.name, 'value': record.value};
+
+        }
+
+        removeEntry = function(record) {
+          localStorage.removeItem(record.name);
+          var index = records.indexOf(record);
+          records.splice(index, 1);
+        }
+
+      </script>
+      <div class="panel-group" id="accordion">
+        {{#each window.records}}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion"
+                 href="#{{ name }}">
+                {{ name }}
+              </a>
+            </h4>
+          </div>
+          <div id="{{ name }}" class="panel-collapse collapse in">
+            <div class="panel-body">
+              {{ value }}
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+
+      <div class="panel-footer">
+
+        <form class="css-form">
+
+          <label>Name
+            <input type="text"
+                   required
+                   min="1"
+                   max="63"
+
+                />
+                 <!--ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9-]+$/"-->
+          </label>
+          <!--
+          TODO: get ACE working
+          TODO: get Add form working
+          TODO: validate JSON
+          TODO: Form/wizard full domain name spec: http://dot-bit.org/Namespace:Domain_names_v2.0
+          -->
+
+          <div
+              style="margin-bottom: 1em"
+              ui-ace=
+                  "{
+                      useWrapMode : true,
+                      mode: 'javascript'
+                    }"
+              >
+          </div>
+          <i>Only performs <code>name</code> validation and a rough size check
+             the <code>value</code>, see the <a
+                href="http://dot-bit.org/Namespace:Domain_names_v2.0">domain
+                                                                      name
+                                                                      specification</a>
+             for more info</i>.
+          <button onclick="addEntry({})" class="pull-right btn btn-primary">
+            Add
+          </button>
+          <br/>
+        </form>
+      </div>
+
+    </div>
+    <!--/entries-->
+  </div>
+</div>
