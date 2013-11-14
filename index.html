@@ -52,7 +52,19 @@
 <p>Speech.js is a thin wrapper which translates URI's between the traditional domain name system and an Alternative Domain Name System (altDNS), transforming <code>example.alt</code>-&gt; <code>example.jsdns.tld</code>.  Speech.js websites rely on the <em>users</em> social network to provide the initial routing information and process and stores this information <em>in the browser</em> (<a href="#Legal">immunizing the website from legal attacks</a>) while only requiring <a href="#User%20Experience">logging into a social networking site</a>.  Thanks to the simplicity of the deployment model, it is <a href="#scaling">very, <strong>very</strong> cheap</a> to run a Speech.js site, nullifying the effect of taking down any single website.</p>
 
 <h2>
-<a name="speechis" class="anchor" href="#speechis"><span class="octicon octicon-link"></span></a>Speech.is</h2>
+<a name="speechjs-20" class="anchor" href="#speechjs-20"><span class="octicon octicon-link"></span></a>Speech.js 2.0</h2>
+
+<p>If you think that's cool, here are the two big features planned for version 2.0:</p>
+
+<ul>
+<li>
+<strong>Customized Feeds</strong> Even if governments create IP blacklists, publishers will be able to hand out private and unique URIs to each user.</li>
+<li>
+<strong>WebRTC DHT</strong> This will remove the sign-in process entirely, making routing entirely transparent to the end user.</li>
+</ul><p>Speech.js is reaching its third and final Alpha build.  The prior 'alpha' builds produced proof-of-concept implementations which were capable of navigating compatible .bit websites.  It is not a matter of "if" or "how" it works, this third alpha simply reimplements the prior work using a more structured architecture.   We would like to squeeze customized feeds, a WebRTC DHT, and plenty more in time for version 1.0 but <a href="https://github.com/SpeechJS/speech.js">we need your help</a>!  </p>
+
+<h1>
+<a name="speechis" class="anchor" href="#speechis"><span class="octicon octicon-link"></span></a>Speech.is</h1>
 
 <p>Speech.js is the reference implementation of the JavaScript Domain Name System client specification and <a href="www.speech.is">Speech.is</a> (pronounced "speech DOT is") provides access to the <a href="http://dot-bit.org/Main_Page">.bit decentralized alternative domain name system</a> and serves as the reference Speech.js deployment.</p>
 
@@ -66,17 +78,8 @@
 
 <p>-Article 19 of the <a href="http://www.un.org/en/documents/udhr/index.shtml#a19">United Nations Universal Declaration of Human Rights</a> </p>
 
-<h2>
-<a name="speechjs-v20" class="anchor" href="#speechjs-v20"><span class="octicon octicon-link"></span></a>Speech.js v2.0</h2>
-
-<p>And this is only the capabilities <em>planned</em> for version 1.0!  Here are the two hard goals we have for version 2.0:</p>
-
-<ul>
-<li>
-<strong>Customized Feeds</strong> Even if governments create IP blacklists publishers will be able to hand out private and unique entry points for every user.</li>
-<li>
-<strong>WebRTC DHT</strong> This will remove the sign-in process entirely, making routing entirely transparent to the end user.</li>
-</ul><p>We want to squeeze these into version 1.0 but <a href="https://github.com/SpeechJS/speech.js">we need your help</a>!</p>
+<h1>
+<a name="technical-details" class="anchor" href="#technical-details"><span class="octicon octicon-link"></span></a>Technical Details</h1>
 
 <h2>
 <a name="legal" class="anchor" href="#legal"><span class="octicon octicon-link"></span></a>Legal</h2>
@@ -99,7 +102,7 @@
 <p>We believe that we will be able to offer a level at least as high as that of any CDN hosted JavaScript provider, your local DNS server, or your favorite package manager's local mirror.  In the future, we believe we will be able to offer even stronger security guarantees.  </p>
 
 <h2>
-<a name="technical-breakdown-of-visiting-examplejsdnstld" class="anchor" href="#technical-breakdown-of-visiting-examplejsdnstld"><span class="octicon octicon-link"></span></a>Technical Breakdown of visiting example.jsdns.tld</h2>
+<a name="breakdown-of-visiting-examplejsdnstld" class="anchor" href="#breakdown-of-visiting-examplejsdnstld"><span class="octicon octicon-link"></span></a>Breakdown of visiting example.jsdns.tld</h2>
 
 <h3>
 <a name="navigationstart" class="anchor" href="#navigationstart"><span class="octicon octicon-link"></span></a>navigationStart</h3>
@@ -116,8 +119,8 @@
 
 <p>After retrieving the information the parent page stores DNS records in <a href="http://en.wikipedia.org/wiki/Web_storage">localStorage</a> and then loads the destination website using an iFrame.  The parent page is hidden and the child page is shown as if it were the main page using the new <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-iframe-element.html#attr-iframe-seamless"><code>seamless</code></a> attribute.  The destination site can cooperatively pass URL updates to the parent page to provide a truly seamless user experience.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<h2>
+<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h2>
 
 <p>Conceived of and developed by <a href="indolering.com">indolering</a>.</p>
       </section>
