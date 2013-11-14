@@ -131,7 +131,7 @@ require([
         }
 
         // use app here
-        console.log(app);
+//        console.log(app);
         console.log('Running jQuery %s', $().jquery);
     }
 );

@@ -9,7 +9,6 @@
   <title>speechjs</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild -->
@@ -26,8 +25,8 @@
 
     <div class="header">
       <ul class="nav nav-pills pull-right">
-        <li class="active"><a href="connect.html">Connect</a></li>
-        <li><a href="config.html">Config <span class="label label-danger">devs only</span></a></li>
+        <li class="{{#if connect}} active {{/if}}"><a href="connect.html">Connect</a></li>
+        <li class="{{#if config}} active {{/if}}"><a href="config.html">Config <span class="label label-danger">devs only</span></a></li>
       </ul>
       <h3 class="text-muted">Speech.js</h3>
     </div>
