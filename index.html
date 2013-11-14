@@ -28,7 +28,7 @@
         <span class="ribbon-outer">
           <span class="ribbon-inner">
             <h1>Speech.js</h1>
-            <h2>Making censorship circumvention as easy as signing into Facebook</h2>
+            <h2>Censorship circumvention that's as easy as signing into Facebook</h2>
           </span>
           <span class="left-tail"></span>
           <span class="right-tail"></span>
@@ -49,31 +49,49 @@
         <h1>
 <a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
-<p>Speech.js is a thin wrapper which translates URI's between the traditional domain name system and an Alternative Domain Name System (altDNS), transforming <code>example.alt</code>-&gt; <code>example.jsdns.tld</code>.  Speech.js is the reference implementation of the JavaScript Domain Name System client specification and <a href="www.speech.is">Speech.is</a> (pronounced "speech DOT is") provides access to the <a href="http://dot-bit.org/Main_Page">.bit decentralized alternative domain name system</a> and serves as the reference deployment of Speech.js.</p>
+<p>Speech.js is a thin wrapper which translates URI's between the traditional domain name system and an Alternative Domain Name System (altDNS), transforming <code>example.alt</code>-&gt; <code>example.jsdns.tld</code>.  Speech.js websites rely on the <em>users</em> social network to provide the initial routing information and process and stores this information <em>in the browser</em> (<a href="#Legal">immunizing the website from legal attacks</a>) while only requiring <a href="#User%20Experience">logging into a social networking site</a>.  Thanks to the simplicity of the deployment model, it is <a href="#scaling">very, <strong>very</strong> cheap</a> to run a Speech.js site, nullifying the effect of taking down any single website.</p>
 
-<h1>
-<a name="speechis" class="anchor" href="#speechis"><span class="octicon octicon-link"></span></a>Speech.is</h1>
+<h2>
+<a name="speechis" class="anchor" href="#speechis"><span class="octicon octicon-link"></span></a>Speech.is</h2>
 
-<p>While getting to the homepage still relies on the traditional DNS system, Speech.is provides two additional defenses against nation-wide censorship. The first is the location of the Speech.is servers and domain name: the <a href="https://en.wikipedia.org/wiki/International_Modern_Media_Institute">data-haven of Iceland</a>.  This makes it very difficult to hold Speech.is legally liable for any content hosted in other countries.</p>
+<p>Speech.js is the reference implementation of the JavaScript Domain Name System client specification and <a href="www.speech.is">Speech.is</a> (pronounced "speech DOT is") provides access to the <a href="http://dot-bit.org/Main_Page">.bit decentralized alternative domain name system</a> and serves as the reference Speech.js deployment.</p>
 
-<p>The second is political: the *.speech.is second level domain name injects <em>free speech</em> into the pandering of politicians trying to censor the internet.  Even if a country chooses to censor a specific domain, (such as wikileaks.speech.is) Speech.js offers routing using the hash/fragment convention: <code>wikileaks.speech.is</code> -&gt; <code>speech.is#wikileaks.bit</code>.  The <code>#wikileaks.bit</code> portion of the url isn't even sent to the webserver, let alone included in the low-level DNS requests.  Politician seeking to restrict our online speech rights will be forced to advocate for censoring <code>speech.is</code> itself.</p>
+<p>While any Speech.js deployment relies on the traditional DNS system, Speech.is provides two additional defenses against state-sponsored censorship. The first is the location of the Speech.is servers and domain name: the <a href="https://en.wikipedia.org/wiki/International_Modern_Media_Institute">data-haven of Iceland</a>.  This makes it very difficult to hold Speech.is legally liable for any content hosted in other countries.</p>
 
-<p>And this is only the beginning, just wait what we will be capable of in 5 years.</p>
+<p>Even if a country chooses to censor a specific domain (such as wikileaks.speech.is) Speech.js offers routing using the hash/fragment convention: <code>wikileaks.speech.is</code> -&gt; <code>speech.is#wikileaks.bit</code>.  The <code>#wikileaks.bit</code> portion of the url is never sent to the webserver, let alone included in the low-level DNS requests.  Politician seeking to restrict our online speech rights will be forced to advocate for censoring <code>speech.is</code> itself.  Something justifiable on a home or corporate network but an obvious affront to basic human rights when enforced at via political means,</p>
+
+<blockquote>
+<p>Everyone has the right to freedom of opinion and expression; this right includes freedom to hold opinions without interference and to seek, receive and impart information and ideas through any media and regardless of frontiers.</p>
+</blockquote>
+
+<p>-Article 19 of the <a href="http://www.un.org/en/documents/udhr/index.shtml#a19">United Nations Universal Declaration of Human Rights</a> </p>
+
+<h2>
+<a name="speechjs-v20" class="anchor" href="#speechjs-v20"><span class="octicon octicon-link"></span></a>Speech.js v2.0</h2>
+
+<p>And this is only the capabilities <em>planned</em> for version 1.0!  Here are the two hard goals we have for version 2.0:</p>
+
+<ul>
+<li>
+<strong>Customized Feeds</strong> Even if governments create IP blacklists publishers will be able to hand out private and unique entry points for every user.</li>
+<li>
+<strong>WebRTC DHT</strong> This will remove the sign-in process entirely, making routing entirely transparent to the end user.</li>
+</ul><p>We want to squeeze these into version 1.0 but <a href="https://github.com/SpeechJS/speech.js">we need your help</a>!</p>
 
 <h2>
 <a name="legal" class="anchor" href="#legal"><span class="octicon octicon-link"></span></a>Legal</h2>
 
-<p>Speech.js, Speech.is, and .bit DNS are all parts of a larger effort to end the threat of SOPA and other state-sponsored <a href="https://www.eff.org/free-speech-weak-link#dns">DNS censorship</a> regimes.  A Speech.js site neither hosts nor links to any content deemed objectionable in major western democracies. As a result the webhost, the upstream carriers, and the owners of the domain name are all immune from legal and political censorship.</p>
+<p>Speech.js, Speech.is, and .bit DNS are all parts of a larger effort to end the threat of SOPA and other state-sponsored <a href="https://www.eff.org/free-speech-weak-link#dns">DNS censorship</a> regimes.  A Speech.js site neither hosts nor links to any content deemed objectionable in major western democracies.  As a result the webhost, the upstream carriers, and the owners of the domain name are all immune from legal and political censorship.  A more in-depth analysis can be found in the <a href="http://dot-bit.org/JsDNS_RFC#Legal_Rational">jsDNS specification proposal</a>.</p>
 
 <h2>
 <a name="user-experience" class="anchor" href="#user-experience"><span class="octicon octicon-link"></span></a>User Experience</h2>
 
-<p>The user experience for visiting a Speech.js website is identical to that of any other website with a login requirement, such as the New York Times or Facebook. Speech.js relies on the <em>users</em> social network to provide the initial routing information, stores this information <em>in the browser</em> and automatically updates it whenever changes occur. From then on (even if the user restarts their computer) they are never prompted to login again.</p>
+<p>The user experience for visiting a Speech.js website is identical to that of any other website with a login requirement, such as the New York Times or Facebook.   After the initial login information is automatically updated it whenever changes occur and is stored in the browser itself. From then on (even if the user restarts their computer) they are never prompted to login again. </p>
 
 <h2>
 <a name="scaling" class="anchor" href="#scaling"><span class="octicon octicon-link"></span></a>Scaling</h2>
 
-<p>Unlike server-side proxies or content mirrors, a Speech.js deployment can easily scale to virtually any traffic load very cheaply.  A minimal Speech.js deployment consists of a single static HTML file which loads the CSS and JavaScript files from the free <a href="http://cdnjs.com/">cdnjs</a> content delivery network. Combined with Cloudflare's free HTML caching a Speech.js deployment can handle the traffic load of a top-5 website for around <a href="https://docs.google.com/spreadsheet/ccc?key=0Am9LbxJR3-Q-dFQ3c2lJa1BVejdrT2JnZjBRWm83YlE&amp;usp=sharing">$20/month</a>.</p>
+<p>Unlike <a href="http://dot-bit.org/JsDNS_RFC#Comparison_of_jsDNS_to_Alternatives">server-side proxies or content mirrors</a>, a Speech.js deployment can easily scale to virtually any traffic load very cheaply.  A minimal Speech.js deployment consists of a single static HTML file which loads the CSS and JavaScript files from the free <a href="http://cdnjs.com/">cdnjs</a> content delivery network. Combined with Cloudflare's free HTML caching a Speech.js deployment can handle the traffic load of a top-5 website for around <a href="https://docs.google.com/spreadsheet/ccc?key=0Am9LbxJR3-Q-dFQ3c2lJa1BVejdrT2JnZjBRWm83YlE&amp;usp=sharing">$20/month</a>.</p>
 
 <h2>
 <a name="security" class="anchor" href="#security"><span class="octicon octicon-link"></span></a>Security</h2>
@@ -86,12 +104,12 @@
 <h3>
 <a name="navigationstart" class="anchor" href="#navigationstart"><span class="octicon octicon-link"></span></a>navigationStart</h3>
 
-<p>Whatever the URL, be it wikipedia.jsdns.tld or wikileaks.jsdns.tld, a Speech.js deployment serves the exact same webpage to visitors. If the user has not visited the website before they prompted to log into a social network. Speech.js scans their friends pages for compatible DNS publisher links and presents them to the user in order of popularity.  Ultimately, the user must decide which DNS publisher(s) s/he trusts based on the choices of her/his friends.</p>
+<p>Whatever the URL, be it wikipedia.jsdns.tld or wikileaks.jsdns.tld, a Speech.js deployment serves the exact same webpage to visitors. If the user has not visited the website before they are prompted to log into a social network. Speech.js scans their friends pages for compatible DNS feeds and presents them to the user in order of popularity.  While the software relies on consensus among multiple lists, ultimately the user decides which DNS feeds s/he chooses to use informed by the choices of her/his friends.</p>
 
 <h3>
 <a name="redirectstart" class="anchor" href="#redirectstart"><span class="octicon octicon-link"></span></a>redirectStart</h3>
 
-<p>These feeds can be as simple as private friend to friend message with raw JSON, an app that the user or their friends have authorized, or jsDNS entries published as posts.   Feeds can be customized for each subscriber, enabling publishers to hand out <strong>unique endpoints for every user</strong>.</p>
+<p>These feeds can be as simple as private friend to friend message with raw JSON, an app that the user or their friends have authorized, or jsDNS entries published as posts.</p>
 
 <h3>
 <a name="domainlookupstart" class="anchor" href="#domainlookupstart"><span class="octicon octicon-link"></span></a>domainLookupStart</h3>
