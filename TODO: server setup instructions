@@ -1,0 +1,11 @@
+Install OpenSSH-HPN
+
+http://spoutcraft.org/threads/blazing-fast-sftp-ssh-transfer.7682/
+Install ZSH
+Install Om-my-ZSH
+
+apt-get install zsh
+apt-get install git-core
+wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+chsh -s /bin/zsh
+login/out?

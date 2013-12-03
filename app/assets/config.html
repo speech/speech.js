@@ -1,0 +1,103 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>speak</title>
+
+  <link rel="stylesheet" href="/styles/main.css">
+  <script src="scripts/speech.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+
+	<body data-spy="scroll" data-target="#navbar">
+
+  <div class="container">
+	<div class="jumbotron">
+  <h1>Speech.js Config</h1>
+
+  <p class="alert alert-danger">
+    This is a developer interface to add or delete records. It is all alpha
+    quality code: nothing is secure, hide your hamster.
+  </p>
+
+    <p>Oh, and please <a href="https://github.com/SpeechJS/speech.js">fork</a> it : )</p>
+
+  <button type="button" class="btn btn-warning btn-large"
+          btn-checkbox
+          btn-checkbox-true="1"
+          btn-checkbox-false="0"
+          onclick='$("#config-panel").slideToggle();'
+      >
+    Toggle Config
+  </button>
+
+</div>
+
+<div id="config-panel" style="display: none">
+    <!--entries-->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h1 class="panel-title">Entries</h1>
+      </div>
+      <div class="alert alert-warning">
+        <p>
+        FYI: There are debugging entries hardcoded into speech.js which show up
+        here, deleting or editing them has no impact on the system. However,
+        sometimes the browser stuffs things into localStorage as well.
+        </p>
+      </div>
+
+      <div class="panel-group" id="accordion">
+
+      </div>
+
+      <div class="panel-footer clearfix">
+
+        <form class="css-form" action="">
+
+          <label>Name
+            <input id='name'
+                   type="text"
+                   required
+                   min="1"
+                   max="63"
+
+                />
+                 <!--regex /^[a-zA-Z0-9][a-zA-Z0-9-]+$/-->
+          </label>
+
+          <br/>
+          <textarea id="editor" name="editor">Code goes here.</textarea>
+          <br/>
+          <i>Input is not validated, see the <a
+              href="http://dot-bit.org/Namespace:Domain_names_v2.0">
+            domain name spec</a> for more info</i>.
+          <button onclick="config.save()" class="pull-right btn btn-primary">
+            save
+          </button>
+
+        </form>
+      </div>
+
+    </div>
+    <!--/entries-->
+  </div>
+
+  <div class="footer row">
+  <ul class="list-inline">
+    <li><a href="http://twitter.com/speechis" target="_blank" title="@speechis" style="text-decoration:none;"><i class="glyphicon glyphicon-bullhorn"></i></a></li>
+    <li><a href="http://github.com/speechjs" target="_blank" title="@speechjs" style="text-decoration:none;"><i class="glyphicon glyphicon-random"></i></a></li>
+    <li><a href="mailto:admin@speech.is" title="yawa@jeremie-parker.com" style="text-decoration:none; color:#E54C3B;"><i class="glyphicon glyphicon-envelope"></i></a></li>
+  </ul>
+</div>
+</div>
+  <script>
+    $(document).ready(function() {
+     config = require('/scripts/config');
+     config.createEntries();
+    });
+  </script>
+</body>
+</html>

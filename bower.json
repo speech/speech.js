@@ -2,12 +2,10 @@
   "name": "speechjs",
   "version": "0.0.0",
   "dependencies": {
-    "sass-bootstrap": "~3.0.0",
-    "requirejs": "~2.1.8",
-    "modernizr": "~2.6.2",
     "jquery": "~1.10.2",
+    "bootstrap": "~3.0.2",
     "uri.js": "~1.11.2",
-    "ace": "~1.1.1"
+    "domready": "*"
   },
   "devDependencies": {}
 }

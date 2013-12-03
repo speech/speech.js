@@ -3,163 +3,65 @@
  * @author indolering
  */
 
-require.config({
-  paths: {
-    dns: 'dns',
-    resize: 'resize',
-    jquery: '../bower_components/jquery/jquery',
-    uri: '../bower_components/uri.js/src/URI',
-    punycode: '../bower_components/uri.js/src/punycode',
-    IPv6: '../bower_components/uri.js/src/IPv6',
-    SecondLevelDomains: '../bower_components/uri.js/src/SecondLevelDomains',
-    fragmentURI: '../bower_components/uri.js/src/URI.fragmentURI'
+var $ = require('/scripts/libs/jquery'),
+  URI = require('/scripts/libs/URI');
 
+function Nav(iframe) {
 
-  }
-});
+  this.iframe = iframe;
+  //  this.self = this; //WTF, WHY DID THIS STOP WORKING?!
+  window.nav = this;
 
-require([
-  'nav',
-  'dns',
-  'resize'
-], function (nav, dns, resize) {
-    'use strict';
-    var DEBUG = true;
-    // Prevent console call to throw errors on old browser
-    // Mute console when DEBUG is set to false
-    // TODO: turn DEBUG to false on grunt:build
-    if (DEBUG === false || !window.console) {
-      window.console = {
-        assert                    : function() {},
-        clear                     : function() {},
-        count                     : function() {},
-        debug                     : function() {},
-        dir                       : function() {},
-        dirxml                    : function() {},
-        error                     : function() {},
-        exception                 : function() {},
-        group                     : function() {},
-        groupCollapsed            : function() {},
-        groupEnd                  : function() {},
-        info                      : function() {},
-        log                       : function() {},
-        markTimeLine              : function() {},
-        msIsIndependentlyComposed : function() {},
-        profile                   : function() {},
-        profileEnd                : function() {},
-        table                     : function() {},
-        time                      : function() {},
-        timeEnd                   : function() {},
-        timeStamp                 : function() {},
-        trace                     : function() {},
-        warn                      : function() {}
-      };
+  // https://github.com/SpeechJS/speech.js/issues/12
+  // is why this is a weird object instead of just a var:
+  // it might be abstracted away.
+  /**
+   * @param {string | Object} url Full href (jsDNS) or URI object (internal nav)
+   * TODO: replace w/ an object that can be bound to URL and use postMessage
+   * w/ destination sites that include cooperative JS lib.
+   */
+  this.go = function(url) {
+    if (typeof url === 'string') {
+      url = URI(url);
     }
-
-//nav.js
-//  isolate URN
-//  dns.lookup(URN)
-//dns.js page   √ *.5
-//  lookup DNS record
-//  cached + hardcoded
-//  bits.name REST API √
-//  create + return DNS record object
-//nav.js  page   √ *.5
-//  $addresses from record.addresses() (prefer https, url, ip4, ip6, ns)
-//  var $address
-//    while $addresses
-//      $test = $addresses.pop()
-//      $.getHeaders($test, header, sync)
-//        on header status 200
-//          assign $address
-//          break loop
-//  if($address)
-//    go forth
-//  else
-//  Error
-    console.info(dns);
-    console.info(resize);
-    console.info(nav);
-    var record;
-    window.addEventListener('DOMContentLoaded', function() {
-
-    record = dns.lookup(window.location.host.slice(-3));
-    console.info("DNS record returned: ", record);
-    });
-//    var urls = record.
-//      sort(function(a, b) {
-//      return a.netSize - b.netSize;
-//    });
-//
-//    var url;
-//    while (urls) {
-//      url = urls.pop()
-//
-//      if (reachable(url))
-//        break;
-//      else
-//        url = null;
-//    }
-//
-//    if (url === null)
-//      throw('no urls');
-//    else
-//      iFrame.src = url;
-//  }
-
-
-
-//  Config page √ *.5
-//  About page √ .25
-//  Error page √ .75
-//  Fake login page √ * .5
-//Public ALPHA
-//  JS for cooperative website URL passing
-//  Arbitrary Publisher URL
-//  Arbitrary name URL
-//  Get from GitHub repo
-//  GitHub auto-discovery
-//Developer BETA
-//  Backup general publisher server
-//    RSS of changes?
-//    SubPubHub?
-//    CouchDB mirror <-> PouchDB client store?
-//    BloomFilter for TTL > 1 hour?
-//  Get from Twitter post
-//  Twitter auto-discovery
-//  Facebook auto-discovery
-//  CloudFlare app integration?
-//  WebRTC?
-//  Weird Ajax iFrame for nameservers??
-//  "Authenticated" feeds (http://username:password@url)??
-//  PGP message passing??
-//Public Beta
-//  Twitter/facebook/Diaspora publishing services?
-
-
-
-/*
-    window.entry;
-
-    var dns = new Worker("/scripts/dns.js");
-    dns.addEventListener("message", function (oEvent) {
-      //TODO: Implement support for url forwarding only (no masking)
-      //TODO: Check IPv6 access?
-      //TODO: Check result access?
-      //TODO: Test cors?
-//    if (answer.cors) {
-//      iframe.setAttribute('src', answer.url);
-//    } else {
-//      window.location.replace(answer.url);
-//    }
-
-      //TODO: Sanitize data to stop malicious entries
-      console.log('Worker said : ' + oEvent.data);
-    }, false);
-
-
-    dns.postMessage("ali"); // start the worker.
-    */
+    //TODO: handle pathname, fragments, etc from original URL
+    this.iframe.attr('src', url.href());
   }
-);
 
+  /**
+   * Tests all potential URI's for connectivity
+   * @param {(Array.<URI> | Array.<string>)} urls
+   * TODO: Benchmark webSockets vs HEAD request
+   */
+  this.load = function(urls) {
+    var result = urls.forEach(function(url, go) {
+    //localStorage mangles URI objects github.com/SpeechJS/speech.js/issues/15
+      url = new URI(url);
+      console.group();
+      console.info('connectivity test of ' + url.href());
+      $.ajax({
+        type: 'HEAD',
+        url : url.href()
+      })
+        .complete(function(jqXHR, textStatus) {
+          console.info(url, jqXHR, textStatus);
+          if (textStatus !== 'timeout') {
+            //DNS level connectivity === timeouts.
+            console.info(url.href() + ' is reachable.');
+            console.groupEnd();
+            //TODO: do this w/out the global var!
+            //self.go(url);
+            window.nav.go(url);
+          } else {
+            console.warn(url.href() + ' is NOT reachable.');
+            console.groupEnd();
+//          throw new Fail({name:'timeout', message:
+//            'None of these urls worked: ' + urls});
+          }
+        })
+    });
+  }
+
+}
+
+module.exports = Nav;

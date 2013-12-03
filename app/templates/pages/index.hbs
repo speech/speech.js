@@ -2,20 +2,11 @@
 layout: none
 ---
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Speech.js</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
+  <title>Speech.is</title>
 
-  <!-- build:js scripts/vendor/modernizr.js -->
-  <script src="bower_components/modernizr/modernizr.js"></script>
-  <!-- endbuild -->
   <style>
       /*
        * Styling is inlined for performance reasons
@@ -28,39 +19,47 @@ layout: none
       margin: 0px;
     }
 
-    #speechjs {
+    #speech {
       border: 0px none transparent;
       padding: 0px;
       margin: 0px;
+      min-height: 100%;
+    }
+
+    #dns {
+      display: none;
     }
 
   </style>
 </head>
 <body>
 
-<div class="container">
 
-  <!--<iframe id="speechjs" seamless width="100%" src=""-->
-          <!--sandbox="allow-forms allow-scripts allow-top-navigation">-->
-
-<iframe id="speechjs" seamless width="100%" src="/connect.html"
-        sandbox="allow-forms allow-scripts allow-top-navigation">
+<iframe id="speech" seamless width="100%" allowfullscreen="true" src="">
 </iframe>
 
-</div>
+<iframe id="dns" width="0px" sandbox="allow-scripts allow-same-origin">
+  <!--TODO:
+    abstract DNS lookup as httpS://api.www.jsdns.tld iFrame.postMessage()
+    isolates localStorage from malicious MTM attacks when destination site
+    http://example.jsdns.tld is not wrapped in SSL (Firefox will block comms
+    from HTTPS sites to non HTTPS websites).
 
-<!-- build:js scripts/nav.js -->
-<script data-main="scripts/nav" src="bower_components/requirejs/require.js"></script>
+    Firefox does not allow webworkers access to any client-side db, which would
+    have been a very elegant solution.
+  -->
+</iframe>
+
+
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="http://www.speech.is/bower_components/jquery/jquery.js"></script>
+<!-- endbower -->
 <!-- endbuild -->
 
-<!-- build:js scripts/nav.js -->
-<script src="scripts/nav.js"></script>
+<!-- build:js scripts/speech.js -->
+<script data-main="http://www.speech.is/scripts/speech" src="www.speech.is/bower_components/requirejs/require.js"></script>
 <!-- endbuild -->
-
-<!--&lt;!&ndash; build:js scripts/nav.js &ndash;&gt;-->
-<!--<script src="scripts/dns.js"></script>-->
-<!--&lt;!&ndash; endbuild &ndash;&gt;-->
-
 
 </body>
 </html>
