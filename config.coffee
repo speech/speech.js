@@ -22,8 +22,8 @@ exports.config =
     templates:
       joinTo: 'scripts/speech.js'
   plugins:
-    autoprefixer:
-      browsers: ["last 1 version", "> 10%"]
+  #    autoprefixer:
+  #      browsers: ["last 1 version", "> 10%"]
     imageoptimizer:
       smushit: false # if false it use jpegtran and optipng, if set to true it will use smushit
       path: 'images' # your image path within your public folder

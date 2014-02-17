@@ -20,10 +20,10 @@
     "css-brunch": ">= 1.0 < 1.8",
     "uglify-js-brunch": ">= 1.0 < 1.8",
     "imageoptmizer-brunch": "0.0.4",
-    "clean-css-brunch": ">= 1.0 < 1.8",
-    "autoprefixer-brunch": "~1.7.5"
+    "clean-css-brunch": ">= 1.0 < 1.8"
   },
   "devDependencies": {
-    "read-components": "~0.5.3"
+    "read-components": "~0.5.3",
+    "qunit": "~0.5.18"
   }
 }
