@@ -3,22 +3,23 @@
  * TODO: Switch to webworkers when Fx enables indexdb from webworkers
  * TODO: Add WebRTC DHT.
  */
+'use strict';
 
-  var $ = require('/scripts/libs/jquery'),
-    URI = require('/scripts/libs/URI'),
-//    SecondLevelDomains = require('/scripts/libs/SecondLevelDomains'),
-    Record = require('/scripts/record'),
-    Fail = require('/scripts/fail'),
-    PouchDB = require('/scripts/libs/pouchdb');
+  var $ = require('./libs/jquery'),
+    URI = require('./libs/uri.js/src/URI'),
+    PouchDB = require('./libs/pouchdb/lib/index'),
+    Record = require('./record'),
+    Fail = require('./fail');
 
 function DNS() {
     this.pubs = {};
     //TODO: Round robin multiple providers
 
     //http://127.0.0.1:5984/
-    this.db = new PouchDB('speech');
-    this.db.replicate.from(
-      'https://indolering.cloudant.com/namecoin/_design/meta/_view/active');
+    this.db = new PouchDB('speech', { 'auto_compaction': true});
+
+//    this.db.replicate.from(
+//      'https://indolering.cloudant.com/namecoin/_design/meta/_view/active');
 
     this.pubs.speechis = function(name) {
       $.ajax({
@@ -30,7 +31,7 @@ function DNS() {
         fail    : function(jqXHR, status, error) {
           console.error(
             'Call failed :' + status,
-            "Error: " + error,
+            'Error: ' + error,
             jqXHR);
           return false;
         },
@@ -38,7 +39,7 @@ function DNS() {
           return data;
         }
       });
-    }
+    };
 
 
   /**
@@ -67,17 +68,19 @@ function DNS() {
         fail    : function(jqXHR, status, error) {
           console.error(
             'Call failed :' + status,
-            "Error: " + error,
+            'Error: ' + error,
             jqXHR);
         }
       });
     }
 
-    if(typeof r === "string")
+    if(typeof r === 'string'){
       r = JSON.parse(r);
+    }
 
-    if (r === null || r.value === null)
+    if (r === null || r.value === null){
       throw new Fail({name: 'name'}).over();
+    }
 
     return this.save(r);
   };
@@ -104,11 +107,11 @@ function DNS() {
   };
 
   /**
-   * Saves record to appropriate container and inits _jsdns if needed.
+   * Saves record to appropriate container and inits $jsdns if needed.
    * @param {Record} r DNS record to be saved.
    */
   this.save = function(r) {
-    if (r.__jsdns === null || r.__jsdns === undefined) {
+    if (r.$jsdns === null || r.$jsdns === undefined) {
       r = new Record(r.name, r.value);
     }
 
@@ -131,7 +134,7 @@ function DNS() {
   this.getRecords = function() {
     var records = [];
     Object.keys(localStorage).forEach(function(key){
-      if (key.substring(0,1) !== '_' &&
+      if (key.substring(0, 1) !== '_' &&
         key !== 'consoleHistory' && //chrome dumps debugger settings in localStorage
         key !== 'breakpoints' &&
         key !== 'undefined' &&
@@ -143,7 +146,12 @@ function DNS() {
     return records;
   };
 
+  this.init = function(){
+    return new DNS();
   };
+
+  }
+
 module.exports = new DNS();
 //exports.save = DNS.save;
 //exports.getRecords = DNS.getRecords;

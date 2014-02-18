@@ -3,8 +3,10 @@
  * @author indolering
  */
 
-var $ = require('/scripts/libs/jquery'),
-  URI = require('/scripts/libs/URI');
+'use strict';
+
+var $ = require('./libs/jquery'),
+  URI = require('./libs/uri.js/src/URI');
 
 function Nav(iframe) {
 
@@ -26,7 +28,7 @@ function Nav(iframe) {
     }
     //TODO: handle pathname, fragments, etc from original URL
     this.iframe.attr('src', url.href());
-  }
+  };
 
   /**
    * Tests all potential URI's for connectivity
@@ -58,9 +60,9 @@ function Nav(iframe) {
 //          throw new Fail({name:'timeout', message:
 //            'None of these urls worked: ' + urls});
           }
-        })
+        });
     });
-  }
+  };
 
 }
 

@@ -1,4 +1,4 @@
-var URI = require('scripts/libs/URI');
+var URI = require('./libs/uri.js/src/URI');
 
 /**
  * Settings object for Fail errors.

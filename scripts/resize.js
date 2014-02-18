@@ -3,7 +3,7 @@
  * Credit: https://developer.mozilla.org/en-US/docs/Web/Reference/Events/resize
  * (re)Licensed: http://tinyurl.com/mle6an4
  */
-var ready = require('/scripts/libs/ready');
+var ready = require('./libs/domready/ready.min');
 
 var resizeFired = false,
 drawing = false,

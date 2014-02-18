@@ -2,6 +2,7 @@
  * @license AGPLv3 2013
  * @author indolering
  */
+'use strict';
 
 /* Routing Info
 
@@ -27,12 +28,22 @@
 
  */
 
-var $ = require('/scripts/libs/jquery'),
-  URI = require('/scripts/libs/URI'),
-  ready = require('/scripts/libs/ready'),
-  DNS = require('scripts/dns'),
-  Nav = require('/scripts/nav'),
-  resize = require('/scripts/resize');
+//var $ = require('/scripts/libs/jquery'),
+//  URI = require('/scripts/libs/URI'),
+//  ready = require('/scripts/libs/ready'),
+//  DNS = require('scripts/dns'),
+//  Nav = require('/scripts/nav'),
+//  resize = require('/scripts/resize');
+
+var $ = require('./libs/jquery'),
+  URI = require('./libs/uri.js/src/URI'),
+  ready = require('./libs/domready/ready.min'),
+  resize = require('./resize'),
+  DNS = require('./dns'),
+  Nav = require('./nav');
+
+
+
 
 //TODO: turn all debug and console.info() shit into real unit tests
 var DEBUG = true;
@@ -63,14 +74,13 @@ if (DEBUG) {
   ];
   dummies.forEach(function(dummy) {
     //hardcoded hack to get this working on non-speech.is sites
+    var uri = new URI();
     if (dummy[0] === 'www') {
-      var uri = new URI();
       uri.subdomain('www');
-      uri.path('connect.html');
+      uri.path('/Speech.js/site/connect.html');
       dummy[1].translate = uri.href();
     } else if (dummy[0] === 'localhost') {
-      var uri = new URI();
-      uri.path('connect.html');
+      uri.path('/Speech.js/site/connect.html');
       dummy[1].translate = uri.href();
     }
     DNS.save({'name': dummy[0], 'value': dummy[1]});
@@ -101,9 +111,9 @@ ready(function() {
   console.info('fragment: ' + hash);
 
   if (urn === '') {
-    if (hash && hash[0] !== '!')
+    if (hash && hash[0] !== '!'){
       urn = hash;
-    else if (uri.hostname() == 'localhost' || uri.hostname() == '127.0.0.1') {
+    } else if (uri.hostname() === 'localhost' || uri.hostname() === '127.0.0.1') {
       urn = 'localhost';
     } else {
       urn = 'www';
@@ -115,8 +125,8 @@ ready(function() {
 
 
   var nav = new Nav($('#speech'));
-  nav.load(record._jsdns.uris);
-  console.info('iframe: ', $('#speech'), 'uris: ', record._jsdns.uris);
+  nav.load(record.$jsdns.uris);
+  console.info('iframe: ', $('#speech'), 'uris: ', record.$jsdns.uris);
 
 });
 

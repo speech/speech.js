@@ -1,4 +1,6 @@
-var URI = require('/scripts/libs/URI');
+'use strict';
+
+var URI = require('./libs/uri.js/src/URI');
 //    SecondLevelDomains = require('SecondLevelDomains');
 //    punycode = require('punycode');
 
@@ -29,7 +31,7 @@ var URI = require('/scripts/libs/URI');
    * @typedef {Object} Record
    * @property {String} name - Name of domain, assumes '.bit'
    * @property {bit-value} value - 'value' field from .bit domain name spec.
-   * @property {Object} _jsdns - convenience used by JSDNS, not standard.
+   * @property {Object} $jsdns - convenience used by JSDNS, not standard.
    * */
 
   /**
@@ -42,16 +44,17 @@ var URI = require('/scripts/libs/URI');
    */
   function Record(n, v) {
 
-    if (typeof v == 'string')
+    if (typeof v === 'string'){
       v = JSON.parse(v);
+    }
 
     this.name = n;
     this.value = v;
-    this._jsdns = {
+    this.$jsdns = {
       uris: []
     };
 
-    var uris = this._jsdns.uris;
+    var uris = this.$jsdns.uris;
     Object.keys(v).forEach(function(key) {
       if ([
         'ip',
@@ -69,7 +72,7 @@ var URI = require('/scripts/libs/URI');
         //spec store single entries as String and multiple entries as an array
         var temp = v[key];
         if (!(temp instanceof Array)) {
-          temp = new Array(temp)
+          temp = new Array(temp);
         }
 
         //TODO: extend uri.js to accept IP's as the hostname by default
@@ -82,7 +85,7 @@ var URI = require('/scripts/libs/URI');
         });
 
       }
-    })
+    });
 
   }
 
@@ -90,7 +93,7 @@ var URI = require('/scripts/libs/URI');
    * TODO: extend URI.js to include 'tor' etc and store type as number
    * TODO: sort URI array by network size:
    *
-   * this._jsdns.uris.sort(function(a,b){
+   * this.$jsdns.uris.sort(function(a,b){
    *   ...
    * });
    *

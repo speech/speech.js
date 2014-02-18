@@ -1,12 +1,27 @@
 {
-  "name": "speechjs",
-  "version": "0.0.0",
+  "name"        : "Speech.js",
+  "version"     : "0.5",
+  "authors"     : [
+    "indolering <zachlym@indolering.com>"
+  ],
+  "description" : "Censorship circumvention that's as easy as signing into Facebook",
+  "main"        : "speech.js",
+  "keywords"    : [
+    "keywords",
+    "here"
+  ],
+  "license"     : "AGPLv3",
+  "homepage"    : "https://www.speech.is",
+  "ignore"      : [
+    "node_modules",
+    "libs",
+    "*.iml",
+    "*.idea"
+  ],
   "dependencies": {
-    "jquery": "~1.10.2",
-    "bootstrap": "~3.0.2",
-    "uri.js": "~1.11.2",
-    "domready": "*"
-  },
-  "devDependencies": {
+    "pouchdb" : "~1.1.0",
+    "uri.js"  : "~1.12.0",
+    "jquery"  : "~2.1.0",
+    "domready": "~1.0.2"
   }
 }
