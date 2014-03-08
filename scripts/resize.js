@@ -16,7 +16,7 @@ ready(function () {
     iframe.width = document.documentElement.clientWidth;
     window.addEventListener('resize', throttleResize, false);
     console.info('resize.js registered');
-    if(!iframe){
+    if (!iframe) {
       console.error('iframe is '+ iframe + " in resize.js");
     }
   });

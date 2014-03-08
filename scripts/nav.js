@@ -5,14 +5,17 @@
 
 'use strict';
 
-var $ = require('./libs/jquery'),
-  URI = require('./libs/uri.js/src/URI');
+var $ = require('./libs/jquery/dist/jquery'),
+  URI = require('./libs/uri.js/src/URI'),
+  Record = require('./record');
 
-function Nav(iframe) {
+
+  function Nav(iframe) {
 
   this.iframe = iframe;
   //  this.self = this; //WTF, WHY DID THIS STOP WORKING?!
   window.nav = this;
+
 
   // https://github.com/SpeechJS/speech.js/issues/12
   // is why this is a weird object instead of just a var:
@@ -32,12 +35,16 @@ function Nav(iframe) {
 
   /**
    * Tests all potential URI's for connectivity
-   * @param {(Array.<URI> | Array.<string>)} urls
-   * TODO: Benchmark webSockets vs HEAD request
+   * @param {Record} record with possible destinations
+   * TODO: Benchmark webSockets vs HEAD request.
    */
-  this.load = function(urls) {
-    var result = urls.forEach(function(url, go) {
-    //localStorage mangles URI objects github.com/SpeechJS/speech.js/issues/15
+  this.load = function(record) {
+    //shitty hack
+    if (record.value.value) {
+      record = record.value;
+    }
+    record.$jsdns.uris.forEach(function(url) {
+
       url = new URI(url);
       console.group();
       console.info('connectivity test of ' + url.href());

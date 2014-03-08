@@ -1,0 +1,6 @@
+[submodule "spx"]
+	path = spx
+	url = https://github.com/speech/spx.git
+[submodule "coop.js"]
+	path = coop.js
+	url = https://github.com/speech/coop.js.git
