@@ -32,7 +32,10 @@ casper.test.begin('save', 1, function(test) {
 casper.test.begin('lookup', 1, function(test) {
   DNS.save({'name': nameOne, 'value': valueOne});
   DNS.lookup(nameOne, function(doc) {
-    test.assertEquals(scrubRecord(doc), objOne);
+//    utils.dump(scrubRecord(doc));
+//    utils.dump(scrubRecord(objOne));
+    test.assertEquals(scrubRecord(doc), scrubRecord(objOne)
+    );
     test.done();
   });
 });

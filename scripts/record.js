@@ -61,7 +61,9 @@ function Record(n, v) {
   Object.keys(v).forEach(function(key) {
     if ([
       'ip', //will only work if IP is dedicated
-      'translate'
+      'translate',
+      'http',
+      'link'
       //'ip6', //will require connectivity testing
       //'ns',  //will require ajax "frame" injection.
     ].indexOf(key) > -1) {

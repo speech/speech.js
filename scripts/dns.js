@@ -30,18 +30,18 @@ function DNS() {
    * Equivalent to namecoind name_show d/name or whois on traditional DNS but
    * it assumes '.bit' and it does not support including ANY tld in the query.
    * @param {string} name Domain to lookup, assumes '.bit' tld.
-   * @param {function} load nav.load method for loading websites.
+   * @param {function} callback nav.load method for loading websites.
    */
-  this.lookup = function(name, load) {
+  this.lookup = function(name, callback) {
     /**
      * Check localStorage for cached result
      * @type {Record}
      */
     that.db.get(name, function(err, doc) {
       if (err) {
-        this.fetch(name, load);
+        this.fetch(name, callback);
       } else {
-        load(new Record(name, doc));
+        callback(doc);
       }
     });
   };
@@ -58,7 +58,14 @@ function DNS() {
         throw new Fail({name: 'name'}).over();
       } else {
         that.save(doc);
-        load(doc);
+//        load(doc)
+        that.db.get(r.name, function(err, doc) {
+          if (err) {
+            load(err);
+          } else {
+            load(doc);
+          }
+        });
       }
     });
   };
@@ -67,27 +74,37 @@ function DNS() {
    * Saves record to appropriate container and inits $jsdns if needed.
    * @param {Record} r DNS record to be saved.
    * @param {function} callback Function to send response to.
-  5647 */
+   */
   this.save = function(r, callback) {
     callback = callback || function(m) {log.log(m)};
-    if (r.$jsdns === null || r.$jsdns === undefined) {
+    if (typeof r.$jsdns === 'undefined' || r.$jsdns === null) {
       r = new Record(r.name, r.value);
     }
     that.db.get(r.name, function(err, doc) {
+
       if (!err) {
-        r['_rev'] = doc._rev;
+        that.db.put(r.value, r.name, doc._rev);
+      } else {
+        that.db.put(r.value, r.name);
       }
-      that.db.put(r, function(err, response) {
+      that.db.get(r.name, function(err, doc) {
         if (err) {
-          log.warn(err);
+          callback(err);
         } else {
-          log.info(response);
-          that.db.get(r.name, function(err, doc) {
-            callback(doc);
-          });
+          callback(doc);
         }
       });
     });
+
+    function feedback(err, response) {
+      if (err) {
+        log.warn(err);
+          callback(err);
+      } else {
+        log.info(response);
+        callback(response);
+      }
+    }
   };
 
   /**

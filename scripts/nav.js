@@ -39,10 +39,7 @@ var $ = require('./libs/jquery/dist/jquery'),
    * TODO: Benchmark webSockets vs HEAD request.
    */
   this.load = function(record) {
-    //shitty hack
-    if (record.value.value) {
-      record = record.value;
-    }
+
     record.$jsdns.uris.forEach(function(url) {
 
       url = new URI(url);
