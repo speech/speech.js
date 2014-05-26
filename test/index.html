@@ -1,0 +1,43 @@
+<!doctype html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Speech.is</title>
+  <script type="text/javascript" src="speech.js"></script>
+  <!--<script src="https://www.speech.is/scripts/speech.js"></script>-->
+
+  <style>
+      /*
+       * Styling is inlined for performance reasons
+       * TODO: Test these settings as they were just thrown together.
+       */
+
+    html, body {
+      min-height: 100%;
+      overflow: hidden;
+      margin: 0px;
+      background-color: grey;
+    }
+
+    #speech {
+      border: 0px none transparent;
+      padding: 0px;
+      margin: 0px;
+      min-height: 100%;
+    }
+
+    #dns {
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+<iframe id="speech" seamless width="100%" allowfullscreen="true" src="foo.html">
+</iframe>
+
+<iframe id="dns" width="0px" sandbox="allow-scripts allow-same-origin">
+  <!-- https://github.com/SpeechJS/speech.js/issues/17 -->
+</iframe>
+</body>
+</html>

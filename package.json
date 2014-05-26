@@ -2,7 +2,7 @@
   "author": "Indolering",
   "name": "Speech.js",
   "description": "Censorship circumvention that's as easy as signing into Facebook",
-  "version": "0.0.4",
+  "version": "0.5.0",
   "homepage": "http://speechjs.github.io/speech.js/",
   "repository": {
     "type": "git",
@@ -13,17 +13,22 @@
   },
   "scripts": {
     "start": "brunch watch --server",
-    "test": "brunch test"
+    "test": "casperjs test tests/ --concise"
   },
-  "dependencies": {
-    "javascript-brunch": ">= 1.0 < 1.8",
-    "css-brunch": ">= 1.0 < 1.8",
-    "uglify-js-brunch": ">= 1.0 < 1.8",
-    "imageoptmizer-brunch": "0.0.4",
-    "clean-css-brunch": ">= 1.0 < 1.8",
-    "autoprefixer-brunch": "~1.7.5"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "read-components": "~0.5.3"
+    "read-components": "~0.5.3",
+    "casperjs": "~1.1.0-beta3",
+    "phantomjs": "~1.9.7-1",
+    "gulp": "~3.5.2",
+    "gulp-util": "~2.2.14",
+    "gulp-browserify": "~0.4.4",
+    "gulp-uglify": "~0.2.1",
+    "winston": "~0.7.2",
+    "gulp-strip-debug": "~0.2.0",
+    "mocha": "~1.17.1",
+    "gulp-closure-compiler": "~0.1.2",
+    "uglifyify": "~1.2.3",
+    "gulp-zopfli": "0.0.1"
   }
 }
