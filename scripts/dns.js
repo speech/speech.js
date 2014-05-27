@@ -5,10 +5,12 @@
  */
 'use strict';
 
-var $ = require('./libs/jquery/dist/jquery'),
+//var $ = require('./libs/jquery/dist/jquery'),
+var $ = require('./libs/jquery'),
+
   URI = require('./libs/uri.js/src/URI'),//TODO: test without
 //  PouchDB = require('./libs/pouchdb/dist/pouchdb-nightly.js'), //for casperjs
-  PouchDB = require('./libs/pouchdb/lib/index.js'),
+  PouchDB = require('./libs/pouchdb.js'),
   Record = require('./record'),
   Fail = require('./fail'),
   log = require('./logger');
@@ -19,11 +21,9 @@ function DNS() {
   this.pubs = {};
   //TODO: Round robin multiple providers
 
-  //http://127.0.0.1:5984/
   this.db = new PouchDB('speech', { 'auto_compaction': true});
-  this.db.replicate.from(
-    'https://indolering.cloudant.com/bit/', 'speech', {continuous: true});
-  this.pubs.speech = new PouchDB('https://indolering.cloudant.com/bit/');
+  this.db.replicate.from('http://api.www.speech.is/namecoin/', 'speech', {continuous: true});
+  this.pubs.speech = new PouchDB('http://api.www.speech.is/namecoin/','speech');
 
 
   /**

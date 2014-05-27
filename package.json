@@ -17,18 +17,24 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "read-components": "~0.5.3",
     "casperjs": "~1.1.0-beta3",
-    "phantomjs": "~1.9.7-1",
-    "gulp": "~3.5.2",
-    "gulp-util": "~2.2.14",
+    "chai": "^1.9.1",
+    "chai-as-promised": "^4.1.1",
+    "gulp": "^3.5.6",
     "gulp-browserify": "~0.4.4",
-    "gulp-uglify": "~0.2.1",
-    "winston": "~0.7.2",
-    "gulp-strip-debug": "~0.2.0",
-    "mocha": "~1.17.1",
     "gulp-closure-compiler": "~0.1.2",
+    "gulp-rename": "^1.2.0",
+    "gulp-strip-debug": "~0.2.0",
+    "gulp-uglify": "~0.2.1",
+    "gulp-util": "~2.2.14",
+    "gulp-zopfli": "0.0.1",
+    "leveldown": "^0.10.2",
+    "memdown": "^0.10.0",
+    "mocha": "^1.19.0",
+    "phantomjs": "~1.9.7-1",
+    "read-components": "~0.5.3",
+    "selenium-standalone": "^2.41.0-2.9.0-1",
     "uglifyify": "~1.2.3",
-    "gulp-zopfli": "0.0.1"
+    "winston": "~0.7.2"
   }
 }

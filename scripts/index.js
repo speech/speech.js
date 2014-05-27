@@ -35,13 +35,23 @@
 //  Nav = require('/scripts/nav'),
 //  resize = require('/scripts/resize');
 
-var $ = require('./libs/jquery/dist/jquery'),
+
+
+var $ = require('./libs/jquery'),
   URI = require('./libs/uri.js/src/URI'),
-  ready = require('./libs/domready/ready.min'),
+  ready = require('./libs/ready'),
   resize = require('./resize'),
   DNS = require('./dns'),
   Nav = require('./nav'),
   log = require('./logger');
+
+//var $ = require('./libs/jquery/dist/jquery'),
+//  URI = require('./libs/uri.js/src/URI'),
+//  ready = require('./libs/domready/ready.min'),
+//  resize = require('./resize'),
+//  DNS = require('./dns'),
+//  Nav = require('./nav'),
+//  log = require('./logger');
 
 
 //TODO: turn all debug and console.info() shit into real unit tests

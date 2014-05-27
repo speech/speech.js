@@ -5,7 +5,8 @@
 
 'use strict';
 
-var $ = require('./libs/jquery/dist/jquery'),
+//var $ = require('./libs/jquery/dist/jquery'),
+var $ = require('./libs/jquery'),
   URI = require('./libs/uri.js/src/URI'),
   Record = require('./record');
 
