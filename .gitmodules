@@ -1,6 +1,3 @@
 [submodule "spx"]
 	path = spx
 	url = https://github.com/speech/spx.git
-[submodule "babel"]
-	path = babel
-	url = https://github.com/speech/babel.git

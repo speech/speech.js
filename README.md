@@ -1,13 +1,9 @@
 #Introduction
-Speech.js is a JavaScript interoperability mechanism for Namecoin domains.  
+Speech.js is a JavaScript interoperability mechanism for Namecoin domains. It powers [Speech.is](https://www.speech.is).
 
-This is the development bundle for Speech.js, with it you can produce spx.js and babel.js; the versions of Speech.js
-used in actual deployment.
+This repo is in a state of flux as I am refactoring the meta-aspects of the project such as the server setup & babel.js.
 
-The system is very slow as simplicity and clean code has been emphasized at each engineering point.  This is intentional
-as it is the hopes of the author that just as multiple desktop browser implementations compete on performance and fea-
-tures, multiple in-browser implementations will arise to compete on performance and features as well. Consider Speech.js
-to be the Moziac of in-browser browsers: an early, proof-of-concept example for others to improve upon.
+If you want to play around, stick to items in src and dist. The SPX submodule will be removed entirely.
 
 #Breakdown
 The structure of the program is relatively OO and breaks down into functional network components.  The meat of the
@@ -41,3 +37,17 @@ Config should be replaced with [Puton](https://github.com/speech/speech.js/issue
 
 ## Misc
 The other libraries are fairly short.  PR's explaining them in better detail are welcomed.
+
+# Package Management
+
+NPM and Bower are used in this project:
+
+* NPM is used for developer package management: mocha, gulp, memdown, leveldb, etc.
+* Bower is used for client-side asset management: PouchDB, Ready.js, JQuery, etc.
+
+Items packaged for Bower are generally packaged for use within a web browser wheras NPM packages are generally designed
+for use within Node.js. Bower is strictly used to manage assets, not for dependencies nor anything else.  This enables
+Speech.js, spx, and babel.js to reference specific items in each of those packages without having to take on the entire
+ install.
+
+NPM helps to manage the complex machinery that is the compiler along with all of it's dependencies.
