@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Foo</title>
+    <script>
+        onload = function(){
+            window.hello = "foo";
+            window.foo = true;
+            window.bar = false;
+            var nonce = window.location.hash;
+
+            top.postMessage(window.location.search, "*");
+            document.getElementById('hello').innerHTML=window.location.search;
+        }
+    </script>
+</head>
+<body>
+<div id="hello">Hello World, foo has been loaded!</div>
+</body>
+</html>
