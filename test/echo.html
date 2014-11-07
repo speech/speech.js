@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Echo</title>
+    <script>
+        onload = function(){
+            var echo = window.location.search;
+
+            if(echo === ""){
+                echo = "You must put something in the query string!"
+            }
+
+            top.postMessage(echo, "*");
+            document.getElementById('message').innerHTML=echo;
+        }
+    </script>
+</head>
+<body>
+<div>Hello World!  This is what I have to say:</div>
+<div id="message"></div>
+</body>
+</html>

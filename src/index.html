@@ -1,0 +1,73 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Speech.is</title>
+  <!-- smoosh -->
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
+    <div id="favicons"></div>
+    <script src="init.js"></script>
+    <script>
+        transformURI(window.location, function(err, uri){
+            //TODO move vars to window sub object
+
+            if(err && err['name'] === "redirect"){
+                window.location = err['redirect']; // forward to -> www.jsdns.tld
+            } else if(err){
+                Fail(err);
+            } else {
+                window['uri'] = uri;
+                //TODO: set document.domain = jsdns.tld;
+
+            }
+        })
+    </script>
+
+
+
+    <script src="libs/pouchdb/dist/pouchdb-nightly.min.js" data-></script>
+    <script src="DNS.js"></script>
+    <script>
+        new DNS(null, null, function(err, dns){
+            if(err) Fail(err);
+
+            window['dns'] = dns;
+            dns.lookup(window['uri'].name, function(err, record){
+                if(err) Fail(err);
+
+                if(window['nav']){
+                    window['nav'].load(record, window['uri']);
+                } else {
+                    window['record'] = record;
+                }
+            })
+        })
+    </script>
+
+</head>
+<body>
+<iframe id="speech" seamless width="100%" allowfullscreen="true" src=""></iframe>
+
+<script src='Nav.js'></script>
+
+
+<script>
+
+ window['nav'] = new Nav(document.getElementById('speech'));
+ if(window['record']){
+     window.nav.load(window['record'], window['uri']);
+ }
+
+</script>
+
+<script src='paint.js'></script>
+
+<!-- endsmoosh -->
+<script>
+ updater(document.getElementById('speech'));
+ resizer(document.getElementById('speech'));
+</script>
+
+</body>
+</html>
