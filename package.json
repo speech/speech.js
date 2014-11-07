@@ -2,7 +2,7 @@
   "author": "Indolering",
   "name": "Speech.js",
   "description": "Censorship circumvention that's as easy as signing into Facebook",
-  "version": "0.5.0",
+  "version": "0.5.5",
   "homepage": "http://speechjs.github.io/speech.js/",
   "repository": {
     "type": "git",
@@ -25,7 +25,6 @@
     "gulp-newer": "^0.3.0",
     "gulp-rename": "^1.2.0",
     "gulp-smoosher": "0.0.6",
-    "gulp-strip-debug": "~0.2.0",
     "gulp-uglify-inline": "^0.1.0",
     "gulp-util": "~2.2.14",
     "gulp-zopfli": "0.0.1",
