@@ -3,4 +3,4 @@ Speech.js is a JavaScript interoperability mechanism for Namecoin domains. It po
 
 This repo is in a state of flux as I am refactoring the meta-aspects of the project such as the server setup & babel.js.
 
-Check out [the wiki](https://github.com/speech/speech.js/wiki) for an architectural overview.
+Check out [the wiki](https://github.com/speech/speech.js/wiki) for an overview of the architecture.
