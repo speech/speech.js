@@ -2,7 +2,7 @@
   "author": "Indolering",
   "name": "Speech.js",
   "description": "Censorship circumvention that's as easy as signing into Facebook",
-  "version": "0.0.4",
+  "version": "0.5.5",
   "homepage": "http://speechjs.github.io/speech.js/",
   "repository": {
     "type": "git",
@@ -13,17 +13,29 @@
   },
   "scripts": {
     "start": "brunch watch --server",
-    "test": "brunch test"
+    "test": "casperjs test tests/ --concise"
   },
-  "dependencies": {
-    "javascript-brunch": ">= 1.0 < 1.8",
-    "css-brunch": ">= 1.0 < 1.8",
-    "uglify-js-brunch": ">= 1.0 < 1.8",
-    "imageoptmizer-brunch": "0.0.4",
-    "clean-css-brunch": ">= 1.0 < 1.8",
-    "autoprefixer-brunch": "~1.7.5"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "read-components": "~0.5.3"
+    "bluebird": "^1.2.4",
+    "chai": "^1.9.1",
+    "chai-as-promised": "^4.1.1",
+    "gulp": "^3.5.6",
+    "gulp-closure-compiler": "~0.1.2",
+    "gulp-newer": "^0.3.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-smoosher": "0.0.6",
+    "gulp-uglify-inline": "^0.1.0",
+    "gulp-util": "~2.2.14",
+    "gulp-zopfli": "0.0.1",
+    "leveldown": "^0.10.2",
+    "memdown": "^0.10.0",
+    "mocha": "^1.19.0",
+    "mochify": "^0.9.2",
+    "phantomjs": "~1.9.7-1",
+    "qunitjs": "^1.14.0",
+    "read-components": "~0.5.3",
+    "selenium-standalone": "^2.41.0-2.9.0-1",
+    "uglifyify": "~1.2.3"
   }
 }

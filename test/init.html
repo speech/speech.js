@@ -1,0 +1,202 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Speech.is</title>
+
+    <script src="libs/qunit.js"></script>
+    <link href="libs/qunit.css" rel="stylesheet" type="text/css" media="all">
+    <script src="init.js"></script>
+
+
+</head>
+<body>
+<h1 id="warning"></h1>
+
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+<script>
+    if(navigator.userAgent.search("Firefox") > -1){
+        document.getElementById("warning").innerHTML = "Firefox is not working on these tests (propEqual), use Chrome!"
+    }
+    test("name.jsdns.tld", function(){
+        transformURI(new URL('https://name.speech.is'), function(err, url){
+            ok(!err);
+            propEqual(url, {
+                "name": "name",
+                "subs": [],
+                "url": {
+                "hash": "",
+                "host": "name.bit",
+                "hostname": "name.bit",
+                "href": "https://name.bit/",
+                "origin": "https://name.bit",
+                "password": "",
+                "pathname": "/",
+                "port": "",
+                "protocol": "https:",
+                "search": "",
+                "username": ""
+            }});
+        });
+    });
+
+
+    test("sub.name.jsdns.tl:80/path?query#hash", function(){
+        transformURI(new URL('https://sub.name.speech.is:80/path?query#hash'), function(err, urn){
+            ok(!err);
+            propEqual(urn, {
+                "name": "name",
+                "subs": [
+                    "sub"
+                ],
+                "url": {
+                    "hash": "#hash",
+                    "host": "sub.name.bit:80",
+                    "hostname": "sub.name.bit",
+                    "href": "https://sub.name.bit:80/path?query#hash",
+                    "origin": "https://sub.name.bit:80",
+                    "password": "",
+                    "pathname": "/path",
+                    "port": "80",
+                    "protocol": "https:",
+                    "search": "?query",
+                    "username": ""
+                }
+            })
+        })
+    });
+
+
+    test("jsdns.tld#name.bit", function(){
+        transformURI(new URL('https://speech.is#name.bit'), function(err, urn){
+            ok(!err);
+            propEqual(urn, {
+                "name": "name",
+                "subs": [],
+                "url": {
+                    "hash": "",
+                    "host": "name.bit",
+                    "hostname": "name.bit",
+                    "href": "https://name.bit/",
+                    "origin": "https://name.bit",
+                    "password": "",
+                    "pathname": "/",
+                    "port": "",
+                    "protocol": "https:",
+                    "search": "",
+                    "username": ""
+                }
+            })
+        })
+    });
+
+    test("jsdns.tld#name.bit.us", function(){
+        transformURI(new URL('https://speech.is#name.bit.us'), function(err, urn){
+            ok(!err);
+            propEqual(urn, {
+                "name": "name",
+                "subs": [],
+                "url": {
+                    "hash": "",
+                    "host": "name.bit",
+                    "hostname": "name.bit",
+                    "href": "https://name.bit/",
+                    "origin": "https://name.bit",
+                    "password": "",
+                    "pathname": "/",
+                    "port": "",
+                    "protocol": "https:",
+                    "search": "",
+                    "username": ""
+                }
+            })
+        })
+    });
+
+    test("jsdns.tld#sub.name.bit", function(){
+        transformURI(new URL('https://speech.is#sub.name.bit'), function(err, urn){
+            ok(!err);
+            propEqual(urn, {
+                "name": "name",
+                "subs": [
+                    "sub"
+                ],
+                "url": {
+                    "hash": "",
+                    "host": "sub.name.bit",
+                    "hostname": "sub.name.bit",
+                    "href": "https://sub.name.bit/",
+                    "origin": "https://sub.name.bit",
+                    "password": "",
+                    "pathname": "/",
+                    "port": "",
+                    "protocol": "https:",
+                    "search": "",
+                    "username": ""
+                }
+            })
+        })
+    });
+
+
+    test("jsdns.tld#sub.name.bit:80/path?query#hash", function(){
+        transformURI(new URL('https://speech.is#sub.name.bit:80/path?query#hash'), function(err, urn){
+            ok(!err);
+            propEqual(urn, {
+                "name": "name",
+                "subs": [
+                    "sub"
+                ],
+                "url": {
+                    "hash": "#hash",
+                    "host": "sub.name.bit:80",
+                    "hostname": "sub.name.bit",
+                    "href": "https://sub.name.bit:80/path?query#hash",
+                    "origin": "https://sub.name.bit:80",
+                    "password": "",
+                    "pathname": "/path",
+                    "port": "80",
+                    "protocol": "https:",
+                    "search": "?query",
+                    "username": ""
+                }
+            })
+        })
+    });
+
+
+    test("jsdns.tld redirect", function(){
+        transformURI(new URL('https://speech.is'), function(err, urn){
+            ok(err);
+            propEqual(err, {
+                'name': 'redirect',
+                'redirect':'https://www.speech.is'
+            })
+        })
+    });
+
+    test("parse error", function(){
+        transformURI(new URL('https://speech.is/asdf'), function(err, urn){
+            ok(err);
+            deepEqual(err, {
+                'name': 'format',
+                'message':'No valid domain name found at https://speech.is/asdf'
+            })
+        })
+    });
+
+    function urlTester(actual,expected){
+        var keys = Object.keys(expected);
+        return keys.every(function(k){
+            return actual[k] === expected[k];
+        })
+    }
+
+</script>
+
+
+</body>
+</html>
