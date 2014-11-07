@@ -1,0 +1,17 @@
+/*
+ * TODO: Test these settings as they were just thrown together, cutdown on them.
+ */
+
+html, body {
+    min-height: 100%;
+    overflow: hidden;
+    margin: 0px;
+    background-color: grey;
+}
+
+#speech {
+    border: 0px none transparent;
+    padding: 0px;
+    margin: 0px;
+    min-height: 100%;
+}

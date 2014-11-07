@@ -2,20 +2,22 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Foo</title>
+    <title>Echo</title>
     <script>
         onload = function(){
-            window.hello = "foo";
-            window.foo = true;
-            window.bar = false;
-            var nonce = window.location.hash;
+            var echo = window.location.search;
 
-            top.postMessage(window.location.search, "*");
-            document.getElementById('hello').innerHTML=window.location.search;
+            if(echo === ""){
+                echo = "You must put something in the query string!"
+            }
+
+            top.postMessage(echo, "*");
+            document.getElementById('message').innerHTML=echo;
         }
     </script>
 </head>
 <body>
-<div id="hello">Hello World, foo has been loaded!</div>
+<div>Hello World!  This is what I have to say:</div>
+<div id="message"></div>
 </body>
 </html>
